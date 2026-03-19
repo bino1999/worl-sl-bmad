@@ -1,0 +1,127 @@
+# Sprint Status Tracking
+# Generated: 2026-03-18
+# Project: test-bmad
+# User: Binodbandara
+# Communication Language: English
+# Document Output Language: English
+
+sprint:
+  status: draft
+  date: 2026-03-18
+  epics:
+    - id: 1
+      name: "User Authentication & Onboarding"
+      status: in-progress
+      stories:
+        - id: 1.1
+          title: "User Registration as Job Seeker"
+          status: in-progress
+        - id: 1.2
+          title: "User Registration as Employer/Agency"
+          status: backlog
+        - id: 1.3
+          title: "User Login and Session Management"
+          status: backlog
+        - id: 1.4
+          title: "Profile Management (Job Seeker)"
+          status: backlog
+        - id: 1.5
+          title: "Profile Management (Employer/Agency)"
+          status: backlog
+    - id: 2
+      name: "Job Posting & Premium Boost"
+      status: backlog
+      stories:
+        - id: 2.1
+          title: "Create Job Posting"
+          status: not-started
+        - id: 2.2
+          title: "Edit and Manage Job Postings"
+          status: not-started
+        - id: 2.3
+          title: "Premium Job Boost Feature"
+          status: not-started
+        - id: 2.4
+          title: "Job Posting Validation and Moderation"
+          status: not-started
+    - id: 3
+      name: "Job Search & Discovery"
+      stories:
+        - id: 3.1
+          title: "Search for Jobs by Keyword and Filters"
+          status: not-started
+        - id: 3.2
+          title: "Location-Based Job Matching"
+          status: not-started
+        - id: 3.3
+          title: "View Job Detail Page"
+          status: not-started
+        - id: 3.4
+          title: "Sort and Prioritize Job Listings"
+          status: not-started
+    - id: 4
+      name: "Application & Selection Flow"
+      stories:
+        - id: 4.1
+          title: "Apply to a Job"
+          status: not-started
+        - id: 4.2
+          title: "Employer Reviews Applications"
+          status: not-started
+        - id: 4.3
+          title: "Application Status Notifications"
+          status: not-started
+    - id: 5
+      name: "In-App Messaging"
+      stories:
+        - id: 5.1
+          title: "Initiate Chat on Job Application"
+          status: not-started
+        - id: 5.2
+          title: "Real-Time or Near-Real-Time Messaging"
+          status: not-started
+        - id: 5.3
+          title: "Notification of New Messages"
+          status: not-started
+    - id: 6
+      name: "Ratings & Reviews"
+      stories:
+        - id: 6.1
+          title: "Leave a Review After Job Completion"
+          status: not-started
+        - id: 6.2
+          title: "View and Report Reviews"
+          status: not-started
+    - id: 7
+      name: "Platform Operations & Security"
+      stories:
+        - id: 7.1
+          title: "Ensure Fast Page Load Times"
+          status: not-started
+        - id: 7.2
+          title: "Maintain High Uptime and Reliability"
+          status: not-started
+        - id: 7.3
+          title: "Support Concurrent Users and Scalability"
+          status: not-started
+        - id: 7.4
+          title: "Enforce Data Privacy and Security"
+          status: not-started
+        - id: 7.5
+          title: "Monitor and Backup System Data"
+          status: not-started
+    - id: 8
+      name: "Technical Foundation"
+      stories:
+        - id: 8.1
+          title: "Set Up Web Frontend with React.js"
+          status: not-started
+        - id: 8.2
+          title: "Implement Backend with Node.js and Express.js"
+          status: not-started
+        - id: 8.3
+          title: "Integrate PostgreSQL Database"
+          status: not-started
+        - id: 8.4
+          title: "Add Transactional Email Service"
+          status: not-started
