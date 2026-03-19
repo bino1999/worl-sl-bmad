@@ -8,6 +8,13 @@ export interface RegistrationRequest {
   email: string;
   password: string;
   location: string;
+  role?: 'job_seeker' | 'employer';
+}
+
+export interface EmployerRegistrationRequest extends RegistrationRequest {
+  role: 'employer';
+  companyName: string;
+  industryType?: string;
 }
 
 export interface RegistrationResponse {
@@ -48,6 +55,16 @@ export interface User {
   status: 'unverified' | 'active' | 'suspended';
   emailVerifiedAt: Date | null;
   profilePhotoUrl: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+}
+
+export interface Company {
+  id: number;
+  userId: number;
+  companyName: string;
+  industryType: string | null;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

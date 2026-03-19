@@ -220,3 +220,56 @@ export async function resendVerificationEmail(email: string): Promise<EmailVerif
     throw new Error(`Failed to resend verification email: ${error}`);
   }
 }
+
+/**
+ * Check if company name exists
+ */
+export async function companyNameExists(companyName: string): Promise<boolean> {
+  try {
+    const result = await query(
+      'SELECT id FROM companies WHERE company_name = $1',
+      [companyName]
+    );
+    return result.rows.length > 0;
+  } catch (error) {
+    throw new Error(`Failed to check company name: ${error}`);
+  }
+}
+
+/**
+ * Create new company record
+ */
+export async function createCompany(data: {
+  userId: number;
+  companyName: string;
+  industryType?: string;
+}): Promise<any> {
+  try {
+    // Check if company name already exists
+    const existingCompany = await companyNameExists(data.companyName);
+    if (existingCompany) {
+      throw new ConflictError('This company name is already registered.');
+    }
+
+    // Insert new company
+    const result = await query(
+      `INSERT INTO companies (
+        user_id, company_name, industry_type, created_at, updated_at
+      ) VALUES (
+        $1, $2, $3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+      ) RETURNING id, user_id, company_name, industry_type, created_at, updated_at`,
+      [
+        data.userId,
+        data.companyName,
+        data.industryType || null,
+      ]
+    );
+
+    return result.rows[0];
+  } catch (error) {
+    if (error instanceof ConflictError) {
+      throw error;
+    }
+    throw new Error(`Failed to create company: ${error}`);
+  }
+}

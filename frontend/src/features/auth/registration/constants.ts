@@ -7,3 +7,23 @@ export const SRI_LANKA_DISTRICTS = [
   'Kurunegala', 'Puttalam', 'Anuradhapura', 'Polonnaruwa', 'Badulla',
   'Monaragala', 'Ratnapura', 'Kegalle'
 ];
+
+export const INDUSTRY_TYPES = [
+  'Technology',
+  'Healthcare',
+  'Retail',
+  'Construction',
+  'Manufacturing',
+  'Transportation & Logistics',
+  'Hospitality & Tourism',
+  'Finance & Banking',
+  'Education',
+  'Agriculture',
+  'Real Estate',
+  'Professional Services',
+  'Food & Beverage',
+  'Automotive',
+  'Energy & Utilities',
+  'Other'
+];
+

@@ -12,6 +12,8 @@ import {
   verifyEmailToken,
   resendVerificationEmail,
   emailExists,
+  createCompany,
+  companyNameExists,
 } from '../services/authService';
 import { sendVerificationEmail } from '../services/emailService';
 import { ValidationError, ConflictError } from '../utils/errorHandler';
@@ -27,7 +29,16 @@ export async function register(
   next: NextFunction
 ): Promise<void> {
   try {
-    const { fullName, mobileNumber, email, password, location, role = 'job_seeker' } = req.body;
+    const { 
+      fullName, 
+      mobileNumber, 
+      email, 
+      password, 
+      location, 
+      role = 'job_seeker',
+      companyName,
+      industryType,
+    } = req.body;
 
     // Validate input
     const validation = validateRegistration({
@@ -48,6 +59,19 @@ export async function register(
       return;
     }
 
+    // Validate employer-specific fields
+    if (role === 'employer') {
+      if (!companyName || companyName.trim().length < 2) {
+        const response: RegistrationResponse = {
+          success: false,
+          message: 'Validation failed',
+          errors: { companyName: 'Company name is required and must be at least 2 characters' },
+        };
+        res.status(400).json(response);
+        return;
+      }
+    }
+
     // Check if email already exists
     const emailAlreadyExists = await emailExists(email);
     if (emailAlreadyExists) {
@@ -57,6 +81,20 @@ export async function register(
       };
       res.status(409).json(response);
       return;
+    }
+
+    // Check if company name already exists (for employer registrations)
+    if (role === 'employer') {
+      const companyNameTaken = await companyNameExists(companyName);
+      if (companyNameTaken) {
+        const response: RegistrationResponse = {
+          success: false,
+          message: 'This company name is already registered.',
+          errors: { companyName: 'This company name is already registered' },
+        };
+        res.status(409).json(response);
+        return;
+      }
     }
 
     // Hash password
@@ -72,6 +110,19 @@ export async function register(
       role,
     });
 
+    // Create company record if employer
+    if (role === 'employer') {
+      try {
+        await createCompany({
+          userId: user.id,
+          companyName,
+          industryType,
+        });
+      } catch (error) {
+        // Log the error but don't fail the registration
+        console.error('Failed to create company record:', error);
+      }
+    }
 
     // Create verification token
     const verification = await createEmailVerification(user.id);
